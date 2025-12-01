@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SUMOS – Surat Route Optimization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            margin: auto;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        button {
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e8f5e9;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>SUMOS – Surat Route Finder</h2>
+
+    <select id="start"></select>
+    <select id="end"></select>
+
+    <button onclick="findRoute()">Find Route</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    async function loadNodes() {
+        const res = await fetch("http://localhost:5000/nodes");
+        const data = await res.json();
+        const nodes = data.nodes;
+
+        const startSelect = document.getElementById("start");
+        const endSelect = document.getElementById("end");
+
+        nodes.forEach(node => {
+            startSelect.innerHTML += `<option value="${node}">${node}</option>`;
+            endSelect.innerHTML += `<option value="${node}">${node}</option>`;
+        });
+    }
+
+    async function findRoute() {
+        const start = document.getElementById("start").value;
+        const end = document.getElementById("end").value;
+
+        const res = await fetch(`http://localhost:5000/route?start=${start}&end=${end}`);
+        const data = await res.json();
+
+        document.getElementById("result").innerHTML = `
+            <h3>Best Route:</h3>
+            <p><strong>Path:</strong> ${data.path.join(" → ")}</p>
+            <p><strong>Distance:</strong> ${data.distance_km} km</p>
+        `;
+    }
+
+    loadNodes();
+</script>
+
+</body>
+</html>
