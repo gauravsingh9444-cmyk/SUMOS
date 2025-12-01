@@ -1,0 +1,31 @@
+{
+  "nodes": [
+    "Adajan",
+    "Pal",
+    "Pal_RTO",
+    "Athwagate",
+    "RingRoad",
+    "MajuraGate",
+    "Varachha",
+    "Station",
+    "UdhnaDarwaja",
+    "Sarthana",
+    "Vesu",
+    "DumasRoad",
+    "Piplod"
+  ],
+  "edges": [
+    {"from": "Adajan", "to": "Athwagate", "distance": 5},
+    {"from": "Athwagate", "to": "RingRoad", "distance": 2},
+    {"from": "RingRoad", "to": "UdhnaDarwaja", "distance": 3},
+    {"from": "Varachha", "to": "Sarthana", "distance": 7},
+    {"from": "Vesu", "to": "Piplod", "distance": 4},
+    {"from": "Piplod", "to": "DumasRoad", "distance": 6},
+    {"from": "RingRoad", "to": "MajuraGate", "distance": 4},
+    {"from": "MajuraGate", "to": "Station", "distance": 5},
+    {"from": "Station", "to": "Varachha", "distance": 3},
+    {"from": "Athwagate", "to": "MajuraGate", "distance": 3},
+    {"from": "Pal", "to": "Adajan", "distance": 4},
+    {"from": "Pal_RTO", "to": "Adajan", "distance": 3}
+  ]
+}
